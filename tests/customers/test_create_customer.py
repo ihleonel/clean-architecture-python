@@ -2,6 +2,7 @@ from unittest import TestCase
 from unittest.mock import Mock
 from src.customers.domain.customer import Customer
 from src.customers.application.customer_creator import CustomerCreator
+from src.commons.domain.validation_error import ValidationError
 
 class TestCreateCustomer(TestCase):
     def setUp(self) -> None:
@@ -23,3 +24,10 @@ class TestCreateCustomer(TestCase):
         self.assertEqual("Ruiz", customer.last_name)
         self.assertEqual("leonel.ruiz@gmail.com", customer.email)
         self.assertEqual("Av. Paulista, 1000", customer.address)
+
+    def test_should_not_create_customer_when_email_already_exists(self):
+        with self.assertRaises(ValidationError) as context:
+            self.customer_creator.create("", "Ruiz", "", "Av. Paulista, 1000")
+
+        self.assertEqual("First name is required", context.exception.errors["first_name"])
+        self.assertEqual("Email is required", context.exception.errors["email"])
