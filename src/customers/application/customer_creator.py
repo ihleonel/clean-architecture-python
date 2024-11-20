@@ -5,7 +5,7 @@ from src.customers.domain.customer_validation import CustomerValidation
 class CustomerCreator:
     def __init__(self, customer_respository: CustomerRepository) -> None:
         self.customer_repository = customer_respository
-        self.customer_validation = CustomerValidation()
+        self.customer_validation = CustomerValidation(self.customer_repository)
         pass
 
     def create(self, first_name: str, last_name: str, email: str, address: str) -> None:
