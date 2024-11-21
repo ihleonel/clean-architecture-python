@@ -8,7 +8,6 @@ class CustomerValidation:
     def validate(self, first_name: str, last_name: str, email: str, address: str) -> None:
         errors = {}
 
-
         if first_name is None or first_name == "":
             errors["first_name"] = "First name is required"
 
@@ -17,7 +16,7 @@ class CustomerValidation:
 
         if email is None or email == "":
             errors["email"] = "Email is required"
-        elif self.document_repository.already_exists_email(email) is True:
+        elif self.document_repository.email_already_exists(email) is True:
             errors["email"] = "Email already exists"
 
         if address is None or address == "":

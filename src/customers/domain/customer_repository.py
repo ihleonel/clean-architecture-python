@@ -11,5 +11,5 @@ class CustomerRepository(ABC):
         pass
 
     @abstractmethod
-    def already_exists_email(self, email: str) -> bool:
+    def email_already_exists(self, email: str) -> bool:
         pass
