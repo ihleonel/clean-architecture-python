@@ -9,3 +9,7 @@ class CustomerRepository(ABC):
     @abstractmethod
     def find_by_email(self, email: str) -> Customer|None:
         pass
+
+    @abstractmethod
+    def already_exists_email(self, email: str) -> bool:
+        pass

@@ -17,7 +17,7 @@ class CustomerValidation:
 
         if email is None or email == "":
             errors["email"] = "Email is required"
-        elif self.document_repository.find_by_email(email) is not None:
+        elif self.document_repository.already_exists_email(email) is True:
             errors["email"] = "Email already exists"
 
         if address is None or address == "":
