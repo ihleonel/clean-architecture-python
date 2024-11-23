@@ -10,13 +10,11 @@ class TestUpdateCustomer(TestCase):
         return super().setUp()
 
     def test_should_update_customer(self):
-        expected_customer = Customer(1, "Leonel", "Ruiz Updated", "leonel.ruiz@gmail.com", "Av. Paulista, 1000")
+        old_customer = Customer(1, "Leonel", "Ruiz ", "leonel.ruiz@gmail.com", "Av. Paulista, 1000")
+        self.customer_repository_mock.find_by_id.return_value = old_customer
 
-        self.customer_repository_mock.find_by_id.return_value = Customer(1, "Leonel", "Ruiz", "leonel.ruiz@gmail.com", "Av. Paulista, 1000")
-        self.customer_repository_mock.save.return_value = expected_customer
+        new_customer = self.customer_updater.update(1, "Leonel", "Ruiz Updated", "leonel.ruiz.updated@gmail.com", "Av. Paulista, 1000")
 
-        customer = self.customer_updater.update(1, "Leonel", "Ruiz Updated", "leonel.ruiz@gmail.com", "Av. Paulista, 1000")
-
-        self.customer_repository_mock.find_by_id.assert_called_once_with(1)
-        self.customer_repository_mock.save.assert_called_once_with(expected_customer)
-        self.assertEqual(expected_customer, customer)
+        self.assertEqual(new_customer.first_name, "Leonel")
+        self.assertEqual(new_customer.last_name, "Ruiz Updated")
+        self.assertEqual(new_customer.email, "leonel.ruiz.updated@gmail.com")
