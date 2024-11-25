@@ -1,18 +1,18 @@
 from src.customers.domain.customer import Customer
 from src.customers.domain.customer_repository import CustomerRepository
-from src.customers.domain.customer_validation import CustomerValidation
+from src.customers.domain.customer_create_validation import CustomerCreateValidation
 
 class CustomerCreator:
     def __init__(self, customer_respository: CustomerRepository) -> None:
         self.customer_repository = customer_respository
-        self.customer_validation = CustomerValidation(self.customer_repository)
+        self.customer_create_validation = CustomerCreateValidation(self.customer_repository)
 
 
-    def create(self, first_name: str, last_name: str, email: str, address: str) -> Customer:
+    def create(self, data: dict) -> Customer:
 
-        self.customer_validation.validate(first_name, last_name, email, address)
+        self.customer_create_validation.validate(data)
 
-        customer = Customer(None, first_name, last_name, email, address)
+        customer = Customer(**data)
 
         self.customer_repository.save(customer)
 

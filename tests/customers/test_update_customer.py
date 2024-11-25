@@ -13,7 +13,14 @@ class TestUpdateCustomer(TestCase):
         old_customer = Customer(1, "Leonel", "Ruiz ", "leonel.ruiz@gmail.com", "Av. Paulista, 1000")
         self.customer_repository_mock.find_by_id.return_value = old_customer
 
-        new_customer = self.customer_updater.update(1, "Leonel", "Ruiz Updated", "leonel.ruiz.updated@gmail.com", "Av. Paulista, 1000")
+        data = {
+            "id": 1,
+            "first_name": "Leonel",
+            "last_name": "Ruiz Updated",
+            "email": "leonel.ruiz.updated@gmail.com",
+            "address": "Av. Paulista, 1000"
+        }
+        new_customer = self.customer_updater.update(data=data)
 
         self.assertEqual(new_customer.first_name, "Leonel")
         self.assertEqual(new_customer.last_name, "Ruiz Updated")
