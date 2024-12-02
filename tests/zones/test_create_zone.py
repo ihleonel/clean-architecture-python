@@ -10,11 +10,13 @@ class TestCreateZone(TestCase):
 
 
     def test_create_zone(self):
-        id = None
-        name = "Zone 1"
+        data = {
+            'id': None,
+            'name': 'Zone 1',
+        }
 
-        zone = self.zone_creator.create(id=id, name=name)
+        zone = self.zone_creator.create(data)
 
-        self.assertEqual(id, zone.id)
-        self.assertEqual(name, zone.name)
+        self.assertEqual(data['id'], zone.id)
+        self.assertEqual(data['name'], zone.name)
 
