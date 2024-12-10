@@ -9,4 +9,15 @@ class TestUpdateZone(TestCase):
         return super().setUp()
 
     def test_update_zone(self):
-        pass
+        data = {
+            "id": "1",
+            "name": "test",
+        }
+
+        zone = self.zone_repository.find_by_id(data["id"])
+        self.zone_repository.update(zone, data)
+
+        self.zone_updater.update_zone(data)
+
+        zone = self.zone_repository.find_by_id(data["id"])
+        self.assertEqual(zone.name, data["name"])
