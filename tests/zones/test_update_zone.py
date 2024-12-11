@@ -11,7 +11,7 @@ class TestUpdateZone(TestCase):
     def test_update_zone(self):
         data = {
             "id": "1",
-            "name": "test",
+            "name": "test update",
         }
 
         zone = self.zone_repository.find_by_id(data["id"])
