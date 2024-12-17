@@ -10,14 +10,13 @@ class TestUpdateZone(TestCase):
 
     def test_update_zone(self):
         data = {
-            "id": "1",
+            "id": 1,
             "name": "test update",
         }
 
         zone = self.zone_repository.find_by_id(data["id"])
-        self.zone_repository.update(zone, data)
 
-        self.zone_updater.update_zone(data)
+        self.zone_updater.update(zone, data)
 
         zone = self.zone_repository.find_by_id(data["id"])
         self.assertEqual(zone.name, data["name"])

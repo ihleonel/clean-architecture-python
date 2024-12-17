@@ -22,7 +22,7 @@ class ZoneRepositoryFaker(ZoneRepository):
                 return True
         return False
 
-    def find_by_id(self, id: str) -> Zone:
+    def find_by_id(self, id: int) -> Zone:
         for zone in self.zones:
             if zone.id == id:
                 return zone

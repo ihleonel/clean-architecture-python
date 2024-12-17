@@ -5,4 +5,5 @@ class ZoneUpdater:
         self.zone_repository = zone_repository
 
     def update(self, zone: Zone, data: dict) -> Zone:
+        self.zone_repository.update(zone, data)
         return zone
