@@ -30,3 +30,25 @@ class TestUpdateZone(TestCase):
             self.zone_updater.update(data)
 
         self.assertEqual("Zone not found", context.exception.errors["id"])
+
+    def test_should_not_update_zone_if_name_is_empty(self):
+        data = {
+            "id": 1,
+            "name": "",
+        }
+
+        with self.assertRaises(ValidationError) as context:
+            self.zone_updater.update(data)
+
+        self.assertEqual("Name is required", context.exception.errors["name"])
+
+    def test_should_not_update_zone_if_name_already_exists(self):
+        data = {
+            "id": 1,
+            "name": "Zone 1000",
+        }
+
+        with self.assertRaises(ValidationError) as context:
+            self.zone_updater.update(data)
+
+        self.assertEqual("Name already exists", context.exception.errors["name"])
