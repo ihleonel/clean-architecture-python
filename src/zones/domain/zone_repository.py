@@ -9,3 +9,7 @@ class ZoneRepository(ABC):
     @abstractmethod
     def name_already_exists(self, name: str) -> bool:
         pass
+
+    @abstractmethod
+    def find_by_id(self, id: int) -> Zone|None:
+        pass

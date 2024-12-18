@@ -1,6 +1,7 @@
-from unittest import TestCase
+from src.commons.domain.validation_error import ValidationError
 from src.zones.application.zone_updater import ZoneUpdater
 from tests.zones.fakers.zone_repository_faker import ZoneRepositoryFaker
+from unittest import TestCase
 
 class TestUpdateZone(TestCase):
     def setUp(self):
@@ -14,9 +15,18 @@ class TestUpdateZone(TestCase):
             "name": "test update",
         }
 
-        zone = self.zone_repository.find_by_id(data["id"])
-
-        self.zone_updater.update(zone, data)
+        self.zone_updater.update(data)
 
         zone = self.zone_repository.find_by_id(data["id"])
         self.assertEqual(zone.name, data["name"])
+
+    def test_should_not_update_zone_if_id_is_not_found(self):
+        data = {
+            "id": 1001,
+            "name": "test update",
+        }
+
+        with self.assertRaises(ValidationError) as context:
+            self.zone_updater.update(data)
+
+        self.assertEqual("Zone not found", context.exception.errors["id"])
