@@ -28,3 +28,6 @@ class ZoneRepositoryFaker(ZoneRepository):
                 return zone
         return None
 
+    def count(self) -> int:
+        return len(self.zones)
+

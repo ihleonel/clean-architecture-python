@@ -13,3 +13,7 @@ class ZoneRepository(ABC):
     @abstractmethod
     def find_by_id(self, id: int) -> Zone|None:
         pass
+
+    @abstractmethod
+    def count(self) -> int:
+        pass
