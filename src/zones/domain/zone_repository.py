@@ -7,6 +7,10 @@ class ZoneRepository(ABC):
         pass
 
     @abstractmethod
+    def update(self, zone: Zone) -> None:
+        pass
+
+    @abstractmethod
     def name_already_exists(self, name: str) -> bool:
         pass
 

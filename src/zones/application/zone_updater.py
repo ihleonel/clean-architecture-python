@@ -12,5 +12,7 @@ class ZoneUpdater:
 
         zone = self.zone_repository.find_by_id(data["id"])
 
-        self.zone_repository.update(zone, data)
+        zone.name = data["name"]
+
+        self.zone_repository.update(zone)
         return zone

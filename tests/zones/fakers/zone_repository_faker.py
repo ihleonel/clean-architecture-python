@@ -10,10 +10,10 @@ class ZoneRepositoryFaker(ZoneRepository):
     def save(self, zone: Zone) -> None:
         self.zones.append(zone)
 
-    def update(self, zone: Zone, data: dict) -> None:
-        for zone in self.zones:
-            if zone.id == data["id"]:
-                zone.name = data["name"]
+    def update(self, zone: Zone) -> None:
+        for item in self.zones:
+            if zone.id == item.id:
+                item = zone
                 return
 
     def name_already_exists(self, name: str) -> bool:
