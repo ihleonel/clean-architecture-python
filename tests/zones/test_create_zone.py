@@ -13,7 +13,7 @@ class TestCreateZone(TestCase):
     def test_create_zone(self):
         data = {
             'id': None,
-            'name': 'Zone 1',
+            'name': 'Zone 1 Test',
         }
 
         zone = self.zone_creator.create(data)
