@@ -10,11 +10,14 @@ class CustomerUpdater:
         customer_update_validation = CustomerUpdateValidation(self.customer_repository)
         customer_update_validation.validate(data=data)
 
-        customer = self.customer_repository.find_by_id(data["id"])
-        customer.first_name = data["first_name"]
-        customer.last_name = data["last_name"]
-        customer.email = data["email"]
-        customer.address = data["address"]
+        old_customer = self.customer_repository.find_by_id(data["id"])
+        customer = Customer(
+            id=old_customer.id,
+            first_name=data["first_name"],
+            last_name=data["last_name"],
+            email=data["email"],
+            address=data["address"]
+        )
 
         self.customer_repository.save(customer)
 
