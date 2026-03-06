@@ -8,8 +8,8 @@ class UserCreator:
         self.user_repository = user_repository
         self.user_validate_creation = UserValidateCreation(user_repository)
 
-    def create(self, data: UserTypedDict) -> Result[UserTypedDict]:
-        validation_result: Result[None] = self.user_validate_creation.validate(
+    def create(self, data: UserTypedDict) -> Result[UserTypedDict, dict[str, list[str]]]:
+        validation_result: Result[None, dict[str, list[str]]] = self.user_validate_creation.validate(
             name=data["name"],
             email=data["email"],
             password=data["password"]

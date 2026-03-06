@@ -7,7 +7,7 @@ E = TypeVar("E")
 
 @dataclass(frozen=True)
 class Error(Generic[E]):
-    errors: list[E]
+    errors: E
 
 @dataclass(frozen=True)
 class Success(Generic[T]):

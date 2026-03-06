@@ -22,40 +22,40 @@ class UserValidateCreation:
             errors.update(password_result)
 
         if errors:
-            return Error([errors])
+            return Error(errors)
         return Success(None)
 
     def validate_name(self, name: str) -> dict[str, list[str]] | None:
-        errors = dict[str, list[str]]()
+        errors: list[str] = []
         if not name:
-            errors["name"] = ["Name is required"]
+            errors.append("Name is required")
         elif len(name) < 3:
-            errors["name"] = ["Name must be at least 3 characters long"]
+            errors.append("Name must be at least 3 characters long")
         if errors:
-            return errors
+            return {"name": errors}
         return None
 
     def validate_email(self, email: str) -> dict[str, list[str]] | None:
-        errors = dict[str, list[str]]()
+        errors: list[str] = []
         if not email:
-            errors["email"] = ["Email is required"]
+            errors.append("Email is required")
         elif self.user_repository.email_already_exists(email):
-            errors["email"] = ["Email already exists"]
+            errors.append("Email already exists")
         if errors:
-            return errors
+            return {"email": errors}
         return None
 
     def validate_password(self, password: str) -> dict[str, list[str]] | None:
-        errors = dict[str, list[str]]()
+        errors: list[str] = []
         if not password:
-            errors["password"] = ["Password is required"]
+            errors.append("Password is required")
 
         if len(password) < 8:
-            errors["password"] = ["Password must be at least 8 characters long"]
+            errors.append("Password must be at least 8 characters long")
 
         if not any(char.isdigit() for char in password):
-            errors["password"] = ["Password must contain at least one digit"]
+            errors.append("Password must contain at least one digit")
 
         if errors:
-            return errors
+            return {"password": errors}
         return None

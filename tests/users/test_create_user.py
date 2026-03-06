@@ -33,7 +33,7 @@ class TestCreateUser(TestCase):
 
         self.user_repository_mock.email_already_exists.return_value = False
 
-        result: Result[UserTypedDict] = self.user_creator.create(data=data)
+        result: Result[UserTypedDict, dict[str, list[str]]] = self.user_creator.create(data=data)
         assert isinstance(result, Error)
         self.assertIsInstance(result, Error)
         self.assertEqual(result.errors, {"name": ["Name is required"]})
@@ -48,7 +48,7 @@ class TestCreateUser(TestCase):
 
         self.user_repository_mock.email_already_exists.return_value = True
 
-        result: Result[UserTypedDict] = self.user_creator.create(data=data)
+        result: Result[UserTypedDict, dict[str, list[str]]] = self.user_creator.create(data=data)
         assert isinstance(result, Error)
         self.assertIsInstance(result, Error)
         self.assertEqual(result.errors, {"email": ["Email already exists"]})
@@ -63,7 +63,7 @@ class TestCreateUser(TestCase):
 
         self.user_repository_mock.email_already_exists.return_value = False
 
-        result: Result[UserTypedDict] = self.user_creator.create(data=data)
+        result: Result[UserTypedDict, dict[str, list[str]]] = self.user_creator.create(data=data)
         assert isinstance(result, Error)
         self.assertIsInstance(result, Error)
         self.assertEqual(result.errors, {"password": ["Password must be at least 8 characters long"]})
@@ -78,7 +78,7 @@ class TestCreateUser(TestCase):
 
         self.user_repository_mock.email_already_exists.return_value = False
 
-        result: Result[UserTypedDict] = self.user_creator.create(data=data)
+        result: Result[UserTypedDict, dict[str, list[str]]] = self.user_creator.create(data=data)
         assert isinstance(result, Error)
         self.assertIsInstance(result, Error)
         self.assertEqual(result.errors, {"password": ["Password must contain at least one digit"]})
