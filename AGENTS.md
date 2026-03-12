@@ -65,3 +65,11 @@ python3 -m unittest tests.customers.test_create_customer.TestCreateCustomer.test
 - Repository mocks are created using `unittest.mock.Mock` in each test's `setUp`.
 - The `fakers/` modules inside `tests/` contain fake repository implementations for testing.
 - Domain validations raise `ValidationError` (from `src.commons.domain.validation_error`) with an error dictionary.
+
+## Code Comments Rules
+
+- Code comments should **NOT** be added unless explicitly requested.
+- The code itself should be self-documenting with clear variable names, well-structured functions, and obvious intent.
+- Only add comments when necessary to explain complex business logic, non-obvious decisions, or architectural patterns.
+
+
